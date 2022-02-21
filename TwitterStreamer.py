@@ -1,10 +1,10 @@
 import tweepy
 
-
-class TwitterStream(tweepy.StreamListener):
-    def __init__(self, api):
+class TwitterStream(tweepy.Stream):
+    def __init__(self, api, db):
         self.api = api
-        self.me = api.me()
+        self.db = db
+        self.me = api.verify_credentials()
 
     # the function containing the logic on what to do for each tweet
     def on_status(self, tweet):
@@ -14,11 +14,11 @@ class TwitterStream(tweepy.StreamListener):
             tweet.use.id == self.me.id:
             return    # If we haven't retweeted this tweet yet, retweet it   
         if not tweet.favorited:
-        try: 
-            tweet.favorite()
-            print("Tweet favorited successfully")
-        except Exception as e:
-            print(e)
+            try: 
+                tweet.favorite()
+                print("Tweet favorited successfully")
+            except Exception as e:
+                print(e)
 
     def on_error(self, status):
         print(f"Error while retweeting: {status}")
