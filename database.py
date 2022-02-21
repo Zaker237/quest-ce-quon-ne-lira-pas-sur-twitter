@@ -30,14 +30,17 @@ class DateBaseManager(object):
 
     def inset(self, tweet_id, tweet_user_id, content, tweet_date):
         cursor = self._open_cursor()
-        current_data = datetime.now()
-        req = f"""insert into tweets
-          values ({tweet_id}, {tweet_user_id}, {content}, {tweet_date}, {current_date})
-        """
-        cursor.execute(req)
-
-        # Save (commit) the changes
-        self.conn.commit()
+        try:
+            current_date = datetime.now()
+            req = f"""insert into tweets
+            values ({tweet_id}, {tweet_user_id}, {content}, {tweet_date}, {current_date})
+            """
+            cursor.execute(req)
+            # Save (commit) the changes
+            self.conn.commit()
+            print("tweet successful save!")
+        except Exception as e:
+            print(e)
         self._close_cursor(cursor)
 
     def save_db_as_text_file(self, path):
