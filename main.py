@@ -23,7 +23,7 @@ def main(db):
     twitter_api = tweepy.API(twitter_oauth) # attempt credential verification. prints exception if something is wrong
     
     try:
-        print(twitter_api.verify_credentials())
+        #print(twitter_api.verify_credentials())
         print("Successfully logged in")
     except tweepy.TweepError as e:
         print(e)
