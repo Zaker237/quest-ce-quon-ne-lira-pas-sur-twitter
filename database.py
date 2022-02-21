@@ -13,15 +13,15 @@ class DateBaseManager(object):
     def _close_cursor(self, cursor):
         cursor.close()
 
-    def _create_tables(self):
+    def create_tables(self):
         cursor = self._open_cursor()
-        table = """create table tweets (
-            id int,
-            tweet_id int,
-            twitter_user_id int,
+        table = """create table IF NOT EXISTS tweets (
+            id int PRIMARY KEY NOT NULL,
+            tweet_id BIGINT,
+            twitter_user_id BIGINT,
             content text,
-            tweet_date text,
-            date text,
+            tweet_date DATETIME,
+            date DATETIME
         )"""
         cursor.execute(table)
         self._close_cursor(cursor)

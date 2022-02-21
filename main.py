@@ -2,6 +2,7 @@ import tweepy
 import os
 
 from TwitterStreamer import TwitterStream
+from database import DateBaseManager
 from dotenv import load_dotenv
 
 load_dotenv()
