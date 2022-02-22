@@ -8,9 +8,7 @@ networks:
 services:
   twitter_bot:
     #container_name: winexam_backend
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    image: twitter-bot-1:latest
     tty: true
     env_file:
       - ./.env
