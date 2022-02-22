@@ -1,0 +1,26 @@
+version: "3.7"
+
+networks:
+  bot_1:
+    driver: overlay
+    attachable: true
+
+services:
+  twitter_bot:
+    #container_name: winexam_backend
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    tty: true
+    env_file:
+      - /.env
+    networks:
+      - bot_1
+    volumes:
+      - ./db:/bots/db
+      - ./tweets:/bots/tweets
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.role == manager]
