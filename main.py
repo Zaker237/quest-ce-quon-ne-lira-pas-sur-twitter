@@ -13,7 +13,7 @@ ACCESS_TOKEN = os.getenv("TWITTER_ACCESS_TOKEN")
 TOKEN_SECRET = os.getenv("TWITTER_ACCESS_TOKEN_SECRET")
 HASHTAG = os.environ.get("HASHTAG")
 
-DATABASE_PATH = "database.db"
+DATABASE_PATH = "db/database.db"
 
 db = DateBaseManager(DATABASE_PATH)
 

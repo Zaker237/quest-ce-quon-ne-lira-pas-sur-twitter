@@ -1,8 +1,8 @@
 import json
 import sqlite3
 
-DATABASE_PATH = "database.db"
-FILE_PATH = "tweets.json"
+DATABASE_PATH = "db/database.db"
+FILE_PATH = "tweets/tweets.json"
 
 def format_db_data(data):
     return {
