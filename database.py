@@ -33,7 +33,7 @@ class DateBaseManager(object):
         try:
             current_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             req = f'INSERT INTO tweets(tweet_id, twitter_user_id, content, tweet_date, date) VALUES ({int(tweet_id)}, {int(tweet_user_id)}, "{content}", "{tweet_date}", "{current_date}")'
-            print(req)
+            
             cursor.execute(req)
             # Save (commit) the changes
             self.conn.commit()
@@ -41,9 +41,4 @@ class DateBaseManager(object):
         except Exception as e:
             print("An error occurs")
             print(e)
-        self._close_cursor(cursor)
-
-    def save_db_as_text_file(self, path):
-        cursor = self._open_cursor()
-
         self._close_cursor(cursor)
