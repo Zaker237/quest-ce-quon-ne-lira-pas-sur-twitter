@@ -17,13 +17,13 @@ class DateBaseManager(object):
 
     def create_tables(self):
         cursor = self._open_cursor()
-        table = """create table IF NOT EXISTS tweets (
-            id int PRIMARY KEY NOT NULL,
+        table = """CREATE TABLE IF NOT EXISTS tweets (
+            id INTEGER PRIMARY KEY,
             tweet_id BIGINT,
             twitter_user_id BIGINT,
-            content text,
-            tweet_date DATETIME,
-            date DATETIME
+            content TEXT,
+            tweet_date varchar(255),
+            date varchar(255)
         )"""
         cursor.execute(table)
         self._close_cursor(cursor)
@@ -31,15 +31,15 @@ class DateBaseManager(object):
     def inset(self, tweet_id, tweet_user_id, content, tweet_date):
         cursor = self._open_cursor()
         try:
-            current_date = datetime.now()
-            req = f"""insert into tweets
-            values ({tweet_id}, {tweet_user_id}, {content}, {tweet_date}, {current_date})
-            """
+            current_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            req = f'INSERT INTO tweets(tweet_id, twitter_user_id, content, tweet_date, date) VALUES ({int(tweet_id)}, {int(tweet_user_id)}, "{content}", "{tweet_date}", "{current_date}")'
+            print(req)
             cursor.execute(req)
             # Save (commit) the changes
             self.conn.commit()
             print("tweet successful save!")
         except Exception as e:
+            print("An error occurs")
             print(e)
         self._close_cursor(cursor)
 
