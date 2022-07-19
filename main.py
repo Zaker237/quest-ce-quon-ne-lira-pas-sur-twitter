@@ -15,7 +15,7 @@ HASHTAG = os.environ.get("HASHTAG")
 
 DATABASE_PATH = "db/database.db"
 
-db = DataBaseManager(DATABASE_PATH)
+db = DataBaseManager()
 
 def main(db):
     tweet_stream = TwitterStream(
@@ -28,5 +28,4 @@ def main(db):
     tweet_stream.filter(track=[HASHTAG])
 
 if __name__ == "__main__":
-    db.create_tables()
     main(db)
