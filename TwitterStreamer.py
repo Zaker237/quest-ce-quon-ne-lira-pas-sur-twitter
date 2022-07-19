@@ -13,12 +13,12 @@ class TwitterStream(tweepy.Stream):
             print("it it no a retweet")
             return
         # If we liked retweeted this tweet yet, retweet it   
-        if not tweet["favorited"]:
-            try: 
-                tweet.favorite()
-                print("Tweet favorited successfully")
-            except Exception as e:
-                print(e)
+        #if not tweet["favorited"]:
+        #    try: 
+        #        tweet.favorite()
+        #        print("Tweet favorited successfully")
+        #    except Exception as e:
+        #        print(e)
         try:
             tweet_id = tweet["quoted_status_id"]
             tweet_date = tweet["quoted_status"]["created_at"]
