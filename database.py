@@ -2,11 +2,12 @@ import sqlite3
 
 from datetime import datetime
 
-class DateBaseManager(object):
+class DataBaseManager(object):
     def __init__(self, db_file="tweets.db"):
         self.dbpath = db_file
 
         self.conn = sqlite3.connect(self.dbpath)
+        self._create_tables()
 
     def _open_cursor(self):
         cursor = self.conn.cursor()
@@ -15,7 +16,7 @@ class DateBaseManager(object):
     def _close_cursor(self, cursor):
         cursor.close()
 
-    def create_tables(self):
+    def _create_tables(self):
         cursor = self._open_cursor()
         table = """CREATE TABLE IF NOT EXISTS tweets (
             id INTEGER PRIMARY KEY,
@@ -28,7 +29,7 @@ class DateBaseManager(object):
         cursor.execute(table)
         self._close_cursor(cursor)
 
-    def inset(self, tweet_id, tweet_user_id, content, tweet_date):
+    def insert(self, tweet_id, tweet_user_id, content, tweet_date):
         cursor = self._open_cursor()
         try:
             current_date = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -42,3 +43,25 @@ class DateBaseManager(object):
             print("An error occurs")
             print(e)
         self._close_cursor(cursor)
+
+    def select_all(self):
+        result = []
+        cursor = self._open_cursor()
+        req = "SELECT id, tweet_id, twitter_user_id, content, tweet_date, date FROM tweets"
+        cursor.execute(req)
+        result = cursor.fetchall()
+        self._close_cursor(cursor)
+
+        return result
+
+    def select_by_id(self, key):
+        cursor = self._open_cursor()
+        req = f"SELECT id, tweet_id, twitter_user_id, content, tweet_date, date FROM tweets WHRE id={key}"
+        cursor.execute(req)
+        result = cursor.fetchall()
+        self._close_cursor(cursor)
+
+        if len(result) > 0:
+            return result[0]
+        else:
+            return None
