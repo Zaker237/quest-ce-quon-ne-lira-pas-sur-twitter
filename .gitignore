@@ -130,3 +130,9 @@ dmypy.json
 
 
 .vscode/
+
+# ignore the database file
+db/database.db
+
+# ingore exported file
+tweets/tweets.json
