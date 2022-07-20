@@ -15,7 +15,7 @@ HASHTAG = os.environ.get("HASHTAG")
 
 DATABASE_PATH = "db/database.db"
 
-db = DataBaseManager()
+db = DataBaseManager(DATABASE_PATH)
 
 def main(db):
     tweet_stream = TwitterStream(
