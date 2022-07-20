@@ -3,6 +3,7 @@ FROM python:3.7-alpine
 COPY database.py /bots/
 COPY main.py /bots/
 COPY export_tweets.py /bots/
+COPY read_data.py /bots/
 COPY TwitterStreamer.py /bots/
 COPY requirements.txt /tmp
 RUN pip3 install -r /tmp/requirements.txt
